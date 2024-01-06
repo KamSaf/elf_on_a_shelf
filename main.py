@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from config import app, db
 from models import Package, Elf, Holiday
 from datetime import datetime
@@ -46,6 +46,9 @@ def new_package():
 
 @app.route('/new_holiday', methods=["POST"])
 def new_holiday():
+    if datetime.strptime(request.form.get("frm_start_date"), "%Y-%m-%d") > datetime.strptime(request.form.get("frm_end_date"), "%Y-%m-%d"):
+        flash('End date cannot occur before start date!', 'error')
+        return redirect(url_for('home_page'))
     new_holiday = Holiday(elf_id=request.form.get('frm_elf'),
                           type=request.form.get('frm_type'),
                           start_date=datetime.strptime(request.form.get("frm_start_date"), "%Y-%m-%d"),
@@ -111,12 +114,15 @@ def edit_elf(elf_id):
 
 
 @app.route('/edit_holiday/<int:holiday_id>', methods=['POST', 'GET'])
-def edit_holiday_form(holiday_id):
+def edit_holiday(holiday_id):
     if request.method == 'GET':
         old_holiday = Holiday.query.filter_by(id=holiday_id).first()
         assigned_elf = Elf.query.filter_by(id=holiday_id).first()
         return render_template('edit_holiday.html', old_holiday=old_holiday, assigned_elf=assigned_elf)
     elif request.method == 'POST':
+        if datetime.strptime(request.form.get("frm_start_date"), "%Y-%m-%d") > datetime.strptime(request.form.get("frm_end_date"), "%Y-%m-%d"):
+            flash('End date cannot occur before start date!', 'error')
+            return redirect(url_for('edit_holiday', holiday_id=holiday_id))
         edited_holiday = Holiday.query.filter_by(id=holiday_id).first()
         edited_holiday.elf_id = request.form.get('frm_elf')
         edited_holiday.type = request.form.get('frm_type')
