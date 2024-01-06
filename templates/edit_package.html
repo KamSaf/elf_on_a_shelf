@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="/edit_package/{{ old_package.id }}" method="POST">
+    <div style="margin-top: 60px;" class="d-flex justify-content-between">
+        <div style="width: 30%;" class="p-2 bd-highlight"></div>
+        <div style="width: 40%;" class="p-2 bd-highlight">
+            <h5>Edit Package</h5>
+            <div class="mb-3">
+                <label for="frm_elf" class="form-label">Elf:</label>
+                <select class="form-select" name="frm_elf" required>
+                    {% if old_elf %}
+                        <option value="{{ old_elf.id }}">{{old_elf.name}} {{old_elf.surname}}</option>
+                    {% endif %}
+                    {% for elf in elves %}
+                        {% if not old_elf or old_elf.id != elf.id %}
+                            {% if elf.assigned == 0 %}
+                                <option value="{{ elf.id }}">{{elf.name}} {{elf.surname}} --- Not assigned</option>
+                            {% else %}
+                                <option value="{{ elf.id }}">{{elf.name}} {{elf.surname}}</option>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+    
+            <div class="mb-3">
+                <label for="frm_title" class="form-label">Title:</label>
+                <input type="text" class="form-control" name="frm_title" value="{{ old_package.title }}" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="frm_receiver" class="form-label">Receiver:</label>
+                <input type="text" class="form-control" name="frm_receiver" value="{{ old_package.receiver }}" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="frm_delivery_date" class="form-label">delivery date:</label>
+                <input type="date" id="frm_delivery_date" class="form-control" name="frm_delivery_date" value="{{ old_package.delivery_date.date() }}" required>
+            </div>
+
+        <button type="submit" class="btn btn-success">Edit Package</button>
+        </div>
+        <div style="width: 30%;" class="p-2 bd-highlight"></div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+
+
+

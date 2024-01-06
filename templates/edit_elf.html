@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="/edit_elf/{{ old_elf.id }}" method="POST">
+    <div style="margin-top: 60px;" class="d-flex justify-content-between">
+        <div style="width: 30%;" class="p-2 bd-highlight"></div>
+        <div style="width: 40%;" class="p-2 bd-highlight">
+                <h5>Edit Elf data</h5>
+                <div class="mb-3">
+                    <label for="frm_name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" name="frm_name" placeholder="Enter name" required value="{{ old_elf.name }}">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="frm_surname" class="form-label">Surname:</label>
+                    <input type="text" class="form-control" name="frm_surname" placeholder="Enter surname" required value="{{ old_elf.surname }}">
+                </div>
+            <button type="submit" class="btn btn-success">Edit Elf</button>
+        </div>
+        <div style="width: 30%;" class="p-2 bd-highlight"></div>
+    </div>
+</form>
+
+{% endblock %}

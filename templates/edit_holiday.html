@@ -1,0 +1,48 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="/edit_holiday/{{ old_holiday.id }}" method="POST">
+    <div style="margin-top: 60px;" class="d-flex justify-content-between">
+        <div style="width: 30%;" class="p-2 bd-highlight"></div>
+        <div style="width: 40%;" class="p-2 bd-highlight">
+            <h5>Edit Holiday</h5>
+            <div class="mb-3">
+                <label for="frm_elf" class="form-label">Elf:</label>
+                <select class="form-select" name="frm_elf">
+                    <option value="{{ assigned_elf.id }}">{{assigned_elf.name}} {{assigned_elf.surname}}</option>
+                    {% for elf in elves %}
+                        {% if elf.id != assigned_elf.id %}
+                            <option value="{{ elf.id }}">{{elf.name}} {{elf.surname}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+    
+            <div class="mb-3">
+                <label for="frm_type" class="form-label">Type:</label>
+                <input type="text" class="form-control" name="frm_type" placeholder="Enter holiday type" required value="{{ old_holiday.type }}">
+            </div>
+    
+            <div class="mb-3">
+                <label for="frm-start-date" class="form-label">Start date:</label>
+                <input type="date" id="frm-start-date" class="form-control" name="frm_start_date" required value="{{ old_holiday.start_date.date() }}">
+            </div>
+    
+            <div class="mb-3">
+                <label for="frm-end-date" class="form-label">End date:</label>
+                <input type="date" id="frm-end-date" class="form-control" name="frm_end_date" required value="{{ old_holiday.end_date.date() }}">
+            </div>
+        <button type="submit" class="btn btn-success">Edit Holiday</button>
+        </div>
+        <div style="width: 30%;" class="p-2 bd-highlight"></div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+
+
+

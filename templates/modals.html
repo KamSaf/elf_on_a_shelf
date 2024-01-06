@@ -1,0 +1,145 @@
+<!-- Modal new Package -->
+<div class="modal fade" id="modal_new_package" tabindex="-1" aria-labelledby="modal_new_package_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/new_package" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="modal_new_package_label">Add new Package</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="frm_elf" class="form-label">Elf:</label>
+                        <select class="form-select" name="frm_elf" required>
+                            {% for elf in elves %}
+                                {% if elf.assigned == 0 %}
+                                    <option value="{{ elf.id }}">{{elf.name}} {{elf.surname}} --- Not assigned</option>
+                                {% else %}
+                                    <option value="{{ elf.id }}">{{elf.name}} {{elf.surname}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="frm_title" class="form-label">Title:</label>
+                        <input type="text" class="form-control" name="frm_title" placeholder="Enter package title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="frm_receiver" class="form-label">Receiver:</label>
+                        <input type="text" class="form-control" name="frm_receiver" placeholder="Enter receiver name and surname" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="frm-delivery-date" class="form-label">Delivery date:</label>
+                        <input type="date" id="frm-delivery-date" class="form-control" name="frm_delivery_date" placeholder="Select delivery date" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Add Package</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal new Elf -->
+<div class="modal fade" id="modal_new_elf" tabindex="-1" aria-labelledby="modal_new_elf_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/new_elf" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="modal_new_elf_label">Add new Elf</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="frm_name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" name="frm_name" placeholder="Enter name" required>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="frm_surname" class="form-label">Surname:</label>
+                        <input type="text" class="form-control" name="frm_surname" placeholder="Enter surname" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Add Elf</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+  <!-- Modal new Holiday -->
+<div class="modal fade" id="modal_new_holiday" tabindex="-1" aria-labelledby="modal_new_holiday_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/new_holiday" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="modal_new_holiday_label">Add new Holiday</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="frm_elf" class="form-label">Elf:</label>
+                        <select class="form-select" name="frm_elf">
+                            {% for elf in elves %}
+                                <option value="{{ elf.id }}">{{elf.name}} {{elf.surname}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="frm_type" class="form-label">Type:</label>
+                        <input type="text" class="form-control" name="frm_type" placeholder="Enter holiday type" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="frm-start-date" class="form-label">Start date:</label>
+                        <input type="date" id="frm-start-date" class="form-control" name="frm_start_date" placeholder="Select start date" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="frm-end-date" class="form-label">End date:</label>
+                        <input type="date" id="frm-end-date" class="form-control" name="frm_end_date" placeholder="Select end date" required>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Add Holiday</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+  <!-- Modal Delete item -->
+  <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal_new_delete_label">Delete confirm</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this item?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form id="confirm-delete" method="POST">
+            <input id="frm-item-id" name="frm_item_id" hidden>
+            <button id="submit-delete" type="submit" class="btn btn-danger delete">Confirm</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>

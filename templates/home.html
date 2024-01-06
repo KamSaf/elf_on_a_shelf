@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="margin-top: 60px;" class="d-flex justify-content-between">
+    <div style="width: 100%;" class="p-2 bd-highlight" style="margin-top: 60px;">
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <h1 style="margin-right: 25px;">Packages</h1>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modal_new_package">Add new Package</button>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Elf ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Receiver</th>
+                <th scope="col">Delivery Date</th>
+                <th scope="col">Create Date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for package in packages %}
+                    {% if not package.delivered and not package.deleted %}
+                        <tr>
+                            <th scope="row">{{package.id}}</th>
+                            {% if package.elf_id %}
+                                <td>{{package.elf_id}}</td>
+                            {% else %}
+                                <td class="text-danger">NO ELF ASSIGNED!</td>
+                            {% endif %}
+                            <td>{{package.title}}</td>
+                            <td>{{package.receiver}}</td>
+                            <td class="text-danger">{{package.delivery_date.date()}}</td>
+                            <td>{{package.create_date.date()}}</td>
+                            <td><a class="btn btn-primary" href="/edit_package/{{ package.id }}">Edit</a></td>
+                            <td><button class="btn btn-danger delete" type="button" data-bs-toggle="modal" data-bs-target="#modal_delete" data-delete-url="/delete_package" data-item-id="{{ package.id }}">Delete</button></td>
+                            <td>
+                                <form action="/update_package" method="POST">
+                                    <input name="frm_package_id" value="{{ package.id }}" hidden>
+                                    <button class="btn btn-success" type="submit">Mark as delivered</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div style="margin-top: 60px;" class="d-flex justify-content-between">
+    <div style="width: 100%;" class="p-2 bd-highlight" style="margin-top: 60px;">
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <h1 style="margin-right: 25px;">Hired Elves</h1>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modal_new_elf">Add new Elf</button>
+        </div>
+        
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Status</th>
+                <th scope="col">Hire date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for elf in elves %}
+                    {% if elf.active %}
+                        <tr>
+                            <th scope="row">{{elf.id}}</th>
+                            <td>{{elf.name}}</td>
+                            <td>{{elf.surname}}</td>
+                            {% if elf.assigned > 0 %}
+                                <td class="text-danger">Assigned to: {{elf.assigned}} packages</td>
+                            {% else %}
+                                <td class="text-success">Not assigned</td>
+                            {% endif %}
+                            <td>{{elf.hire_date.date()}}</td>
+                            <td><a class="btn btn-primary" href="/edit_elf/{{ elf.id }}">Edit</a></td>
+                            <td><button class="btn btn-danger delete" type="button" data-bs-toggle="modal" data-bs-target="#modal_delete" data-delete-url="/delete_elf" data-item-id="{{ elf.id }}">Delete</button></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div style="margin-top: 60px;" class="d-flex justify-content-between">
+    <div style="width: 100%;" class="p-2 bd-highlight" style="margin-top: 60px;">
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <h1 style="margin-right: 25px;">Holidays</h1>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modal_new_holiday">Add new Holiday</button>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Elf ID</th>
+                <th scope="col">Type</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End date</th>
+                <th scope="col">Create date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for holiday in holidays %}
+                    {% if holiday.end_date > current_datetime and not holiday.deleted %}
+                        <tr>
+                            <th scope="row">{{holiday.id}}</th>
+                            <td>{{holiday.elf_id}}</td>
+                            <td>{{holiday.type}}</td>
+                            <td class="text-success">{{holiday.start_date.date()}}</td>
+                            <td class="text-danger">{{holiday.end_date.date()}}</td>
+                            <td>{{holiday.create_date.date()}}</td>
+                            <td><a class="btn btn-primary" href="/edit_holiday/{{ holiday.id }}">Edit</a></td>
+                            <td><button class="btn btn-danger delete" type="button" data-bs-toggle="modal" data-bs-target="#modal_delete" data-delete-url="/delete_holiday" data-item-id="{{ holiday.id }}">Delete</button></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
