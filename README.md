@@ -48,4 +48,4 @@ How to run with Docker (build image):
 
 Deployment is done through DigitalOcean service:
 
-    <link>
+    https://octopus-app-hg7dl.ondigitalocean.app/
