@@ -46,6 +46,6 @@ How to run with Docker (build image):
 -------------------------------------------------------
 
 
-Deployment is done through DigitalOcean service:
+Deployment is done through DigitalOcean service (currently not active):
 
     https://octopus-app-hg7dl.ondigitalocean.app/
