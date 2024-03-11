@@ -35,6 +35,14 @@ Elf management system for Santa Claus. It's a CRUD app created with Flask framew
 
 
 
+# Features:
+
+- Adding/editing/deleting Elves,
+- Adding/editing/deleting/marking as delivered Packages,
+- Adding/editing/deleting Elves Holidays,
+
+
+
 # How to run with Docker (pull from DockerHub):
 
 1. Pull image from DockerHub:
