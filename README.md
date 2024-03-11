@@ -6,6 +6,24 @@ Elf management system for Santa Claus. It's a CRUD app created with Flask framew
 
 
 
+# Technologies and tools used:
+
+- Python 3.10,
+- Flask 3.0.0,
+- Flask-SQLAlchemy 3.1.1,
+- Bootstrap5 5.3.0,
+- jQuery 3.6.0,
+
+
+
+# Features:
+
+- Adding/editing/deleting Elves,
+- Adding/editing/deleting/marking as delivered Packages,
+- Adding/editing/deleting Elves Holidays,
+
+
+
 # How to run (no Docker):
 
 1. Create virtual environment and activate it:
@@ -22,24 +40,6 @@ Elf management system for Santa Claus. It's a CRUD app created with Flask framew
 3. Run application with command when in app directory:
 
         python app.py
-
-
-
-# Technologies and tools used:
-
-- Python 3.10,
-- Flask 3.0.0,
-- Flask-SQLAlchemy 3.1.1,
-- Bootstrap5 5.3.0,
-- jQuery 3.6.0,
-
-
-
-# Features:
-
-- Adding/editing/deleting Elves,
-- Adding/editing/deleting/marking as delivered Packages,
-- Adding/editing/deleting Elves Holidays,
 
 
 
@@ -81,7 +81,7 @@ Elf management system for Santa Claus. It's a CRUD app created with Flask framew
 
 
 
-# GIFs
+# GIFs:
 
 
 **Add new elf:**
